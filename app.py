@@ -25,12 +25,9 @@ from werkzeug.security import (
     check_password_hash,
     generate_password_hash,
 )
-
-from agents.chatgpt_agent import generar_reporte_chatgpt
-from agents.claude_agent import revisar_con_claude
-from agents.integrador import integrar_resultados
-from services.simulador_rehabilitacion import calcular_rehabilitacion
-
+from chatgpt_agent import generar_reporte_chatgpt
+from claude_agent import revisar_con_claude
+from integrador import integrar_resultados
 
 # -------------------------------------------------
 # CONFIGURACIÓN GENERAL
