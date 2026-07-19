@@ -1,0 +1,29 @@
+# Entorno virtual
+.venv/
+venv/
+
+# Claves y variables privadas
+.env
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Imágenes médicas temporales
+uploads/*
+!uploads/.gitkeep
+
+# Base de datos local
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuración del editor
+.idea/
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
