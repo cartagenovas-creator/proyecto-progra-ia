@@ -1,116 +1,173 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
 
-    <title>Crear cuenta | Proyecto Proga IA</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Crear cuenta | Rehabilitación IA</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
 </head>
 
-<body class="auth-body">
+<body class="auth-page">
 
-<main class="auth-container">
+<section class="auth-card">
 
-    <section class="auth-card">
+    <div class="auth-logo">
+        ✚
+    </div>
 
-        <div class="auth-brand">
-            <div class="brand-icon">&lt;/&gt;</div>
+    <h1 class="auth-title">
+        Crear una cuenta
+    </h1>
 
-            <div>
-                <h1>Proyecto Proga <span>IA</span></h1>
-                <p>Aprende programación paso a paso</p>
-            </div>
-        </div>
+    <p class="auth-subtitle">
+        Regístrate para guardar evaluaciones y observar tu evolución.
+    </p>
 
-        <div class="auth-header">
-            <p class="section-label">NUEVA CUENTA</p>
-            <h2>Crear cuenta</h2>
-            <p>
-                Tu progreso, historial y quizzes quedarán
-                guardados de forma individual.
-            </p>
-        </div>
-
-        {% if error %}
-            <div class="auth-error">
-                {{ error }}
-            </div>
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+            {% for categoria, mensaje in mensajes %}
+                <div class="alert alert-{{ categoria }} custom-alert">
+                    {{ mensaje }}
+                </div>
+            {% endfor %}
         {% endif %}
+    {% endwith %}
 
-        <form method="POST"
-              action="{{ url_for('registro') }}"
-              class="auth-form">
+    <form
+        action="{{ url_for('registro') }}"
+        method="POST"
+    >
 
-            <label for="nombre">
-                Nombre
+        <div class="mb-3">
+
+            <label
+                for="nombre"
+                class="form-label"
+            >
+                Nombre completo
             </label>
 
-            <input id="nombre"
-                   name="nombre"
-                   type="text"
-                   value="{{ nombre or '' }}"
-                   required
-                   maxlength="100"
-                   autocomplete="name"
-                   placeholder="Escribe tu nombre">
+            <input
+                id="nombre"
+                type="text"
+                name="nombre"
+                class="form-control"
+                placeholder="Ingresa tu nombre"
+                maxlength="100"
+                autocomplete="name"
+                required
+            >
 
-            <label for="correo">
+        </div>
+
+        <div class="mb-3">
+
+            <label
+                for="correo"
+                class="form-label"
+            >
                 Correo electrónico
             </label>
 
-            <input id="correo"
-                   name="correo"
-                   type="email"
-                   value="{{ correo or '' }}"
-                   required
-                   autocomplete="email"
-                   placeholder="usuario@correo.com">
+            <input
+                id="correo"
+                type="email"
+                name="correo"
+                class="form-control"
+                placeholder="correo@ejemplo.com"
+                autocomplete="email"
+                required
+            >
 
-            <label for="password">
+        </div>
+
+        <div class="mb-3">
+
+            <label
+                for="password"
+                class="form-label"
+            >
                 Contraseña
             </label>
 
-            <input id="password"
-                   name="password"
-                   type="password"
-                   required
-                   minlength="8"
-                   autocomplete="new-password"
-                   placeholder="Mínimo 8 caracteres">
+            <input
+                id="password"
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Mínimo 8 caracteres"
+                minlength="8"
+                autocomplete="new-password"
+                required
+            >
 
-            <label for="confirmar_password">
+        </div>
+
+        <div class="mb-4">
+
+            <label
+                for="confirmar_password"
+                class="form-label"
+            >
                 Confirmar contraseña
             </label>
 
-            <input id="confirmar_password"
-                   name="confirmar_password"
-                   type="password"
-                   required
-                   minlength="8"
-                   autocomplete="new-password"
-                   placeholder="Repite tu contraseña">
+            <input
+                id="confirmar_password"
+                type="password"
+                name="confirmar_password"
+                class="form-control"
+                placeholder="Repite tu contraseña"
+                minlength="8"
+                autocomplete="new-password"
+                required
+            >
 
-            <button class="auth-submit-button"
-                    type="submit">
-                Crear cuenta
-            </button>
+        </div>
 
-        </form>
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            Crear cuenta
+        </button>
 
-        <p class="auth-link">
-            ¿Ya tienes cuenta?
-            <a href="{{ url_for('login') }}">
-                Iniciar sesión
-            </a>
-        </p>
+    </form>
 
-    </section>
+    <div class="text-center mt-4">
 
-</main>
+        <span class="text-muted">
+            ¿Ya tienes una cuenta?
+        </span>
+
+        <a
+            href="{{ url_for('login') }}"
+            class="fw-bold text-decoration-none"
+        >
+            Inicia sesión
+        </a>
+
+    </div>
+
+    <p class="text-center text-muted small mt-4 mb-0">
+        Tus evaluaciones quedarán asociadas a esta cuenta.
+    </p>
+
+</section>
 
 </body>
 </html>

@@ -1,252 +1,128 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-          content="Inicia sesión en Proyecto Proga IA.">
+    <title>Iniciar sesión | Rehabilitación IA</title>
 
-    <title>Iniciar sesión | Proyecto Proga IA</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
 </head>
 
-<body class="login-page">
+<body class="auth-page">
 
-<main class="login-shell">
+<section class="auth-card">
 
-    <section class="login-card">
+    <div class="auth-logo">
+        ✚
+    </div>
 
-        <div class="login-decoration login-decoration-one"></div>
-        <div class="login-decoration login-decoration-two"></div>
+    <h1 class="auth-title">
+        Bienvenido
+    </h1>
 
-        <div class="login-content">
+    <p class="auth-subtitle">
+        Inicia sesión para registrar evaluaciones y consultar tu evolución.
+    </p>
 
-            <div class="login-brand">
-
-                <div class="login-brand-icon">
-                    &lt;/&gt;
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+            {% for categoria, mensaje in mensajes %}
+                <div class="alert alert-{{ categoria }} custom-alert">
+                    {{ mensaje }}
                 </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
-                <div>
-                    <h1>
-                        Proyecto Proga
-                        <span>IA</span>
-                    </h1>
+    <form
+        action="{{ url_for('login') }}"
+        method="POST"
+    >
 
-                    <p>
-                        Continúa tu aprendizaje
-                    </p>
-                </div>
+        <div class="mb-3">
 
-            </div>
+            <label
+                for="correo"
+                class="form-label"
+            >
+                Correo electrónico
+            </label>
 
-            <div class="login-badge">
-                BIENVENIDO
-            </div>
-
-            <div class="login-heading">
-
-                <div class="login-heading-icon">
-                    🔒
-                </div>
-
-                <div>
-                    <h2>
-                        Iniciar sesión
-                    </h2>
-
-                    <p>
-                        Recupera tu progreso, historial,
-                        resultados y temas estudiados.
-                    </p>
-                </div>
-
-            </div>
-
-            {% if error %}
-                <div class="login-error">
-
-                    <span>⚠</span>
-
-                    <p>
-                        {{ error }}
-                    </p>
-
-                </div>
-            {% endif %}
-
-            <form method="POST"
-                  action="{{ url_for('login') }}"
-                  class="login-form">
-
-                <div class="login-field">
-
-                    <label for="correo">
-                        Correo electrónico
-                    </label>
-
-                    <div class="login-input-group">
-
-                        <span class="login-input-icon">
-                            ✉
-                        </span>
-
-                        <input id="correo"
-                               name="correo"
-                               type="email"
-                               value="{{ correo or '' }}"
-                               placeholder="usuario@correo.com"
-                               maxlength="180"
-                               autocomplete="email"
-                               required>
-
-                    </div>
-
-                </div>
-
-                <div class="login-field">
-
-                    <label for="password">
-                        Contraseña
-                    </label>
-
-                    <div class="login-input-group">
-
-                        <span class="login-input-icon">
-                            🔒
-                        </span>
-
-                        <input id="password"
-                               name="password"
-                               type="password"
-                               placeholder="Escribe tu contraseña"
-                               minlength="8"
-                               autocomplete="current-password"
-                               required>
-
-                        <button class="login-password-toggle"
-                                id="togglePassword"
-                                type="button"
-                                aria-label="Mostrar contraseña">
-
-                            ◉
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <button class="login-submit"
-                        type="submit">
-
-                    <span>↪</span>
-
-                    Iniciar sesión
-
-                </button>
-
-            </form>
-
-            <div class="login-features">
-
-                <article class="login-feature">
-
-                    <span>📈</span>
-
-                    <div>
-                        <strong>
-                            Progreso personal
-                        </strong>
-
-                        <small>
-                            Continúa donde te quedaste
-                        </small>
-                    </div>
-
-                </article>
-
-                <article class="login-feature">
-
-                    <span>🧠</span>
-
-                    <div>
-                        <strong>
-                            Quizzes
-                        </strong>
-
-                        <small>
-                            Comprueba lo aprendido
-                        </small>
-                    </div>
-
-                </article>
-
-                <article class="login-feature">
-
-                    <span>🏆</span>
-
-                    <div>
-                        <strong>
-                            Logros
-                        </strong>
-
-                        <small>
-                            Desbloquea nuevos retos
-                        </small>
-                    </div>
-
-                </article>
-
-            </div>
-
-            <p class="login-register">
-
-                ¿No tienes cuenta?
-
-                <a href="{{ url_for('registro') }}">
-                    Crear una cuenta
-                    <span>›</span>
-                </a>
-
-            </p>
+            <input
+                id="correo"
+                type="email"
+                name="correo"
+                class="form-control"
+                placeholder="correo@ejemplo.com"
+                autocomplete="email"
+                required
+            >
 
         </div>
 
-    </section>
+        <div class="mb-4">
 
-</main>
+            <label
+                for="password"
+                class="form-label"
+            >
+                Contraseña
+            </label>
 
-<script>
-    const passwordInput = document.getElementById("password");
-    const togglePassword = document.getElementById("togglePassword");
+            <input
+                id="password"
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Ingresa tu contraseña"
+                autocomplete="current-password"
+                required
+            >
 
-    if (passwordInput && togglePassword) {
-        togglePassword.addEventListener("click", function () {
-            const estaOculta = passwordInput.type === "password";
+        </div>
 
-            passwordInput.type = estaOculta
-                ? "text"
-                : "password";
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            Iniciar sesión
+        </button>
 
-            togglePassword.textContent = estaOculta
-                ? "◌"
-                : "◉";
+    </form>
 
-            togglePassword.setAttribute(
-                "aria-label",
-                estaOculta
-                    ? "Ocultar contraseña"
-                    : "Mostrar contraseña"
-            );
-        });
-    }
-</script>
+    <div class="text-center mt-4">
+
+        <span class="text-muted">
+            ¿No tienes una cuenta?
+        </span>
+
+        <a
+            href="{{ url_for('registro') }}"
+            class="fw-bold text-decoration-none"
+        >
+            Regístrate aquí
+        </a>
+
+    </div>
+
+    <p class="text-center text-muted small mt-4 mb-0">
+        Sistema académico. No sustituye una valoración profesional.
+    </p>
+
+</section>
 
 </body>
 </html>
